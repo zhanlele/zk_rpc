@@ -20,7 +20,7 @@ public class ZkClient {
 
     private static CuratorFramework client;
 
-    public static void createSession() {
+    public static CuratorFramework createSession() {
         if (client == null) {
             RetryPolicy exponentialBackoffRetry = new ExponentialBackoffRetry(1000, 3);
             client = CuratorFrameworkFactory.builder()
@@ -39,6 +39,7 @@ public class ZkClient {
         } else {
             System.out.println("会话已经存在");
         }
+        return client;
     }
 
     public static ZkNodeInfo createNode(String path, String nodeData) throws Exception {
